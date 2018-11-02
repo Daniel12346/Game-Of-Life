@@ -1,0 +1,107 @@
+html {
+  --canvas-size: 300px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans_serif;
+}
+
+body {
+  background-color: rgba(236, 14, 14, 0.85);
+  padding: 0;
+  margin: 0;
+}
+.title__main {
+  text-align: center;
+  margin-top: 2rem;
+  color: rgba(208, 255, 0, 0.9);
+}
+.game__main {
+  height: 70vh;
+  flex-flow: row wrap;
+}
+.game__canvas {
+  border: 5px rgba(0, 0, 0, 0.5) solid;
+  width: var(--canvas-size);
+  height: var(--canvas-size);
+  display: block;
+  height: 300px;
+  width: 300px;
+}
+.game__main > * {
+  flex-basis: 100%;
+}
+.game__controls {
+  padding: 0 15vw;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.game__controls > * {
+  margin-left: 1%;
+}
+
+.button {
+  background: rgba(208, 255, 0, 0.85);
+  color: black;
+  border: 0;
+  padding: 0.5rem;
+  transition: all 0.5;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+}
+.button:hover {
+  transform: scale(1.1) translateY(-0.1rem);
+}
+
+.button:active {
+  transform: translateY(0.1rem);
+}
+.game__generations {
+  font-weight: 600;
+  color: rgba(208, 255, 0, 0.9);
+  font-size: 1.1rem;
+  text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.2);
+  display: inline_flex;
+  align-items: center;
+}
+.game__genCount {
+  font-size: 1.5rem;
+  margin-left: 1rem;
+}
+.game__control-label {
+  color: rgba(208, 255, 0, 0.9);
+  font-weight: 700;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  flex-flow: row wrap;
+  text-justify: left;
+}
+.game__control-label > * {
+  flex: 1 0 100%;
+  text-justify: left;
+}
+
+.slider {
+  appearance: none;
+  -moz-appearance: none;
+  color: transparent;
+  background: transparent;
+}
+.slider::-moz-range-thumb {
+  background-color: rgba(208, 255, 0, 0.9);
+  padding: 1.1px;
+  border-radius: 50%;
+  box-shadow: 3px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.slider::-moz-range-track {
+  background-color: rgba(208, 255, 0, 0.25);
+}
+
+/*utility classes*/
+.flexCC {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
