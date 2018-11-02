@@ -8,35 +8,33 @@ class Game {
     this.oldGen = [];
     //the array representing all the cells before the generation shift
     this.newGen = [];
-
     this.genCount = 0;
     //the part of the UI where the generation count is displayed
     this.genCounter = document.querySelector(".game__genCount");
   }
   //initiating the current game's defining arrays(oldGen and newGen)
   //TODO: add different types of random generation
-
   init(random = true, size = this.size, cellSize = this.cellSize) {
     let count = Math.round(size / cellSize);
+    //iterating through the oldGen array
     for (let i = 0; i < count; i++) {
       this.oldGen[i] = [];
+      //iterating through each row of the oldGen array
       for (let j = 0; j < count; j++) {
+        //randomly assigning 0 or 1 to each cell
         this.oldGen[i].push(random ? Math.round(Math.random()) : 0);
       }
     }
-
+    //resetting the generation counter
     this.genCounter.textContent = 0;
-    //resetting the next generation to start over
-    /* if (this.oldGen.length > 1) {
-    this.newGen = [];
-    }*/
   }
-
+  //displaying the current game's oldGen array on the canvas
   paint(canvasContext = ctx, cellSize = this.cellSize, size = this.size) {
-    //row indices
+    //iterating through the array
     for (let i = 0; i < this.oldGen.length; i++) {
+      //iterating through the rows
       for (let j = 0; j < this.oldGen.length; j++) {
-        //painting only the element's value is 1 (true)
+        //painting only if the element's value is 1 (true)
         if (this.oldGen[i][j]) {
           canvasContext.fillRect(
             j * cellSize,
@@ -55,7 +53,9 @@ class Game {
       }
     }
   }
-
+  //performing the generation switch by mapping the oldGen
+  //to the newGen with the conditions determinining the state
+  //of each cell
   nextGen() {
     this.genCount++;
     if (this.newGen.length > 0) {
@@ -69,14 +69,12 @@ class Game {
       )
     );
     this.genCounter.textContent++;
-    //note to self: .map has a second argument (index)
-
-    //return this.newGen;
   }
 
   //checking if the cell is alive or dead
   static isCellAlive(arr, row, el) {
-    //the conditions
+    //the position of the cell
+    //whose state is determined by this function
     let currentCell = arr[row][el];
     //if the neighboring cell does not exist,
     //it is equivalent to a dead one (0);
@@ -87,7 +85,9 @@ class Game {
       arr[row][el - 1] || 0,
       arr[row][el + 1] || 0
     ];
-    //starting from the second row to avoid undefined values
+    //starting from the second row and ending before the last
+    // to avoid undefined values
+
     if (row >= 1) {
       neighbors = neighbors.concat([
         arr[row - 1][el - 1] || 0,
@@ -95,7 +95,7 @@ class Game {
         arr[row - 1][el + 1] || 0
       ]);
     }
-    //TODO: add comments
+
     if (row < arr.length - 1) {
       neighbors = neighbors.concat([
         arr[row + 1][el - 1] || 0,
@@ -104,7 +104,7 @@ class Game {
       ]);
     }
 
-    //looking for the sum of all the neighboring cells'values
+    //looking for the sum of all the neighboring cells' values
     // (alive=1, dead=0)
     let neighborsSum = neighbors.reduce((a, b) => a + b);
     //1. Any live cell with fewer than two live neighbors dies, as if by underpopulation.
@@ -127,6 +127,7 @@ class Game {
     //if nothing changed, the boolean of the initial cell value is returned (0 or 1)
     return Boolean(currentCell);
   }
+  //simulates the generation switch and displays it on the canvas,
   //made this function static because "this" was too confusing
   static simulate(game) {
     if (!isRunning) {
