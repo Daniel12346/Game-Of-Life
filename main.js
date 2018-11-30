@@ -15,6 +15,7 @@ let game = new Game();
 
 //this flag is used to pause or continue to simulation
 let isRunning = false;
+let simulate = Game.prototype.simulate.bind(game);
 //initiating the array
 game.init(true);
 game.nextGen();
@@ -28,7 +29,7 @@ document.querySelector(".button--continue").addEventListener("click", () => {
   //changing the flag to pause if running or continue if paused
   isRunning = !isRunning;
   if (isRunning) {
-    requestAnimationFrame(() => Game.simulate(game));
+    requestAnimationFrame(simulate);
   }
 });
 
@@ -38,7 +39,7 @@ document.querySelector(".button--restart").addEventListener("click", () => {
   //size and cellSize were changed in the previous line
   game.init(true, game.size, game.cellSize);
   game.paint(ctx);
-  requestAnimationFrame(() => Game.simulate(game));
+  requestAnimationFrame(simulate);
 });
 
 //resizing the field

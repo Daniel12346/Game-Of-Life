@@ -63,9 +63,8 @@ class Game {
     }
 
     this.newGen = this.oldGen.map((row, rowIndex) =>
-      row.map(
-        (el, elIndex) =>
-          Game.isCellAlive(this.oldGen, rowIndex, elIndex) ? 1 : 0
+      row.map((el, elIndex) =>
+        Game.isCellAlive(this.oldGen, rowIndex, elIndex) ? 1 : 0
       )
     );
     this.genCounter.textContent++;
@@ -129,12 +128,12 @@ class Game {
   }
   //simulates the generation switch and displays it on the canvas,
   //made this function static because "this" was too confusing
-  static simulate(game) {
+  simulate() {
     if (!isRunning) {
       return;
     }
-    game.nextGen();
-    game.paint(ctx);
-    requestAnimationFrame(() => Game.simulate(game));
+    this.nextGen();
+    this.paint(ctx);
+    requestAnimationFrame(simulate);
   }
 }
