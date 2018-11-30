@@ -126,8 +126,7 @@ class Game {
     //if nothing changed, the boolean of the initial cell value is returned (0 or 1)
     return Boolean(currentCell);
   }
-  //simulates the generation switch and displays it on the canvas,
-  //made this function static because "this" was too confusing
+  //simulates the generation switch and displays it on the canvas
   simulate() {
     if (!isRunning) {
       return;
